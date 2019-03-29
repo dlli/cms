@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+    <constant name="struts.serve.static.browserCache" value="false"/>
+    <!--<constant name="struts.action.extension" value="do"/>-->
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+
+
+
+    <package name="blog" extends="struts-default,json-default" namespace="/blog">
+
+        <interceptors>
+            <interceptor name="login_interceptor" class="com.yc.cms.interceptor.LoginInterceptor"></interceptor>
+            <interceptor-stack name="loginStack">
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <interceptor-ref name="login_interceptor"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="loginStack"></default-interceptor-ref>
+        <global-results>
+            <result type="redirect" name="error_login">/login.jsp</result>
+        </global-results>
+    </package>
+
+
+</struts>
